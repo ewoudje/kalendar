@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "kalandar",
+  "private_key_id": "5e2609949e52d12870a448a18d113cfd43b46a3f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCa+FVaLFkkzS/l\nQwHNyJRQ6pGFOAOIcse8hfSpGUH1TMX1MqXSn6ItqMZVXmWyrUUZKT30LAVRTJu8\nXkI35Fzv73hAAyexedIzqXgKJKoLHKJ4lAiMGjbsCEBIUw7ztuAHJhx7ouzU3U+P\n+Cr6tc1siKTgBAgTVaSoiJ63pCYplAr1BL+b7t23yxcZ44VW9vjPB63jWkZvNWCv\ny/PqrOOo/o8c9gk44Z/y7+Gk3BfPz+ZpgWvbwe+ErGbhXt7QuLV5OmSgMlN0OiuG\nn/Vwa5KMXV6w5FxWtHEN+R+qUgoxSFsKcRDDQS7kI33akl02g2FuX0MvCEXAK0zP\nKIJWFPC/AgMBAAECggEAC5N0UL2SVSDsrHwCZPxQM/EpuKFUBjvItsjs2zrTRf8b\npHLJlz+sbiu20QaxoxS1XilKAvTM2uNVmM8TtDgfRx8ExQdXTjcS4CAPIvbVKupT\nKp2oO8rzglMldiGaMtNczbvnkca8WTRE7rSzhTHSbAKTClbSwZr6p0o5TO96mE1k\nYS2K0tFEEuKyyR42LwZA8Za56arZCdtzHauTdtvT/LJwh3g0FTZs7tvdwltK1aTn\nOVR1I4Lc8p0uJSrpG3Vfzev3osfW7ZhaGZw2tBrgB8IAqBt/9hEtBkHY9e252qKl\nmRMQpheFG+NKcrZu+v7z9xN7AqFoW/KUf5Ag/AS9GQKBgQDXUf6tLzy4gyh1CLWK\nHdiJpZDELxIo0JYGwCElzrrWuldIG9WqdWbZe48RodscM6VtsfrJcDq2WYXHbRJr\n0iYXlkqldeuyIYyyxWxRY2JqiDtzl8nsWXlNoGWJEYCzVshNr9XjnW5F5i+CdBl0\nHMVpeMTaqJTz94YrmZ8KCRZHtwKBgQC4P3z8aqbbEo1d9xXpK3KTQJhhWyKBnn4K\nyNsXMSKPbYvJHStgBeQjTCsnYa1vVmu9cZnNK88nhVl21KU6a5q8C0Qrr6Z44Ld5\nwA+e6NhOwhxn6l8Rfgwl/m9CasOY/DP0Kc7vRuqdTYWgW64VFSTN/ifojwEw0hZL\nYDo+YO7POQKBgDvVyVQPIGyV5hQ/y1MKYDZAEC60dfNpo4dUtOFwxXMObVrYgVPR\nNDeTonpf5Ce+ImaNYwe/bFFoJ0j4Anp796HuXegFEO57bEHxotwrJho8qWjB8ZcA\ndjkgLZcdigpMP3V3O5T5Fr/N673wzXH63NEmgm3REzOIwXw0QIHlbI+ZAoGAURdA\nPygBf/HOXkjdT95bcwu/BTpDGaFUABMeujpZ555jI4S/DmgJXK+tXovS9WmnyZ0x\n/+cEKXS7R12XyvqJA7JBsqiAMDtXBTLOrTX13dP5BJNWfDBp0F8HQMgUhkSZ6SBt\nf0pLACiaY1V2bLj9ldwCXIx0DbSpM0uK1uF6uaECgYEAyfvjAe701tWSdT6sJziR\nEnA8IbQjLt+0ap3nkseObzZ5jQMr8IvPCnT8xi/E8GmmjF4jJMSpXIaAT7oicuJw\nrepxH40aWZrpQPqhtiR23WUxkauVcn/u8JdS9H6kq94eX3a0rXlDSg/2XdLxEKMB\nCsemJHgASMaI11m0JUWeP7k=\n-----END PRIVATE KEY-----\n",
+  "client_email": "developer@kalandar.iam.gserviceaccount.com",
+  "client_id": "108397031483315314625",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/developer%40kalandar.iam.gserviceaccount.com"
+}
