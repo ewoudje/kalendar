@@ -3,26 +3,22 @@ require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/client.php';
 
 // Get the API client and construct the service object.
-$client = getClient(1);
+$client = getClient(3);
 
 $service = new Google_Service_Calendar($client);
 
-// Print the next 10 events on the user's calendar.
-$calendarId = 'primary';
-$optParams = array(
-  'maxResults' => 10,
-  'orderBy' => 'startTime',
-  'singleEvents' => true,
-  'timeMin' => date('c'),
-);
 $results = $service->calendarList->listCalendarList();
-$events = $results->getItems();
+$calendars = $results->getItems();
 
-if (empty($events)) {
-  print "No upcoming events found.\n";
+$s_length = strlen('Kalendar');
+
+if (empty($calendars)) {
+  print "Geen agenda gevonden!\n";
 } else {
-  print "Upcoming events:\n";
-  foreach ($events as $event) {
-      printf("<p>%s</p>", $event->getSummary());
+  foreach ($calendars as $calendar) {
+    if (substr($calendar->getSummary(), -$s_length) === 'Kalendar') {
+      printf("<h2>%s</h2>", substr($calendar->getSummary(), 0, -$s_length));
+      include __DIR__ . '/event_list.php';
+    }
   }
 }

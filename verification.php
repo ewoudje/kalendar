@@ -1,29 +1,27 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
-require __DIR__ . '/database.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/database.php';
 
 $client = new Google_Client();
-$client->setAuthConfig('credentials.json');
-$client->setPrompt('select_account consent');
+$client->setAuthConfigFile('credentials.json');
+$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
+$client->addScope(Google_Service_Calendar::CALENDAR);
+$client->setAccessType('offline');
+$client->setIncludeGrantedScopes(true);
 
-
-$authCode = $_POST['code'];
-
-// Exchange authorization code for an access token.
-$accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-$client->setAccessToken($accessToken);
-
-// Check to see if there was an error.
-if (array_key_exists('error', $accessToken)) {
-    throw new Exception(join(', ', $accessToken));
+if (isset($_GET['code'])) {
+  $access_token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+  $client->setAccessToken($access_token);
+  $sql = "INSERT INTO Clients (access_token, scope, token_type, created, expires_in, refresh_token)
+    VALUES('{$access_token['access_token']}', '{$access_token['scope']}', '{$access_token['token_type']}', {$access_token['created']}
+    , {$access_token['expires_in']}, '{$access_token['refresh_token']}')";
+  $conn = getConnection();
+  $conn->close();
+  $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/kalendar/test.php';
+  //header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+} else {
+  $auth_url = $client->createAuthUrl();
+  header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
 }
-
-$sql = "INSERT INTO Clients (access_token, scope, token_type, created, expires_in, refresh_token)
-  VALUES(\'{$accessToken['access_token']}\', \'{$accessToken['scope']}\', \'{$accessToken['token_type']}\', {$accessToken['created']}
-  , {$accessToken['expires_in']}, \'{$accessToken['refresh_token']}\')";
-echo $sql;
-$conn = getConnection();
-echo $conn->query($sql);
-$conn->close();
 
 ?>
