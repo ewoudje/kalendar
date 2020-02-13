@@ -18,6 +18,7 @@ function day($id, $service, $calendar, $week) {
     include __DIR__ . '/moment_list.php';
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,11 @@ function day($id, $service, $calendar, $week) {
             hash[ary[0]] = ary[1];
         }
 
-        hash[param] = value;
+        if (value == null) {
+          delete hash[param];
+        } else {
+          hash[param] = value;
+        }
 
         var list = [];
         Object.keys(hash).forEach(function (key) {
@@ -97,22 +102,50 @@ function day($id, $service, $calendar, $week) {
     function day(i) {
       location.href = URL_add_parameter(location.href, 'day', i);
     }
+
+    function moment(i) {
+      location.href = URL_add_parameter(location.href, 'moment', i);
+    }
+
+    function ready() {
+      location.href = URL_add_parameter(location.href, 'ready', 'true');
+    }
+
+    function back() {
+      location.href = URL_add_parameter(location.href, 'moment', null);
+    }
   </script>
 </head>
 <body>
 
   <?php if (isset($_GET['code'])): ?>
-    <div class="days">
-      <div class="day" onclick="day(1)"><h2>Maandag <?=date("d/m", strtotime("+1 day", $week->getTimestamp()))?></h2><?=day(1, $service, $calendar, $week)?></div>
-      <div class="day" onclick="day(2)"><h2>Dinsdag <?=date("d/m", strtotime("+2 day", $week->getTimestamp()))?></h2><?=day(2, $service, $calendar, $week)?></div>
-      <div class="day" onclick="day(3)"><h2>Woensdag <?=date("d/m", strtotime("+3 day", $week->getTimestamp()))?></h2><?=day(3, $service, $calendar, $week)?></div>
-      <div class="day" onclick="day(4)"><h2>Donderdag <?=date("d/m", strtotime("+4 day", $week->getTimestamp()))?></h2><?=day(4, $service, $calendar, $week)?></div>
-      <div class="day" onclick="day(5)"><h2>Vrijdag <?=date("d/m", strtotime("+5 day", $week->getTimestamp()))?></h2><?=day(5, $service, $calendar, $week)?></div>
-      <div class="day" onclick="day(6)"><h2>Zaterdag <?=date("d/m", strtotime("+6 day", $week->getTimestamp()))?></h2><?=day(6, $service, $calendar, $week)?></div>
-      <div class="day" onclick="day(7)"><h2>Zondag <?=date("d/m", strtotime("+7 day", $week->getTimestamp()))?></h2><?=day(7, $service, $calendar, $week)?></div>
-    </div>
+    <?php if (isset($_GET['day']) && isset($_GET['moment']) && !(isset($_GET['ready']) && $_GET['ready'] == "true")): ?>
+      <div>
+        <?php
+          $day = strtotime("+" . $_GET['day'] . " day", $week->getTimestamp());
+          $event = $service->events->get($calendar->getId(), $_GET['moment']);
+          $start = $event->start->dateTime;
+          if (empty($start)) {
+              $start = $event->start->date;
+          }
+        ?>
+        <h2>Bent u zeker dat u op dag <?=date("d/m", $day)?> om <?=date("G:i", strtotime($start))?> wilt komen?</h2>
+        <button onclick="ready()">Ja</button>
+        <button onclick="back()">Nee</button>
+      </div>
+    <?php else: ?>
+      <div class="days">
+        <div class="day"><div onclick="day(1)"><h2>Maandag <?=date("d/m", strtotime("+1 day", $week->getTimestamp()))?></h2></div><?=day(1, $service, $calendar, $week)?></div>
+        <div class="day"><div onclick="day(2)"><h2>Dinsdag <?=date("d/m", strtotime("+2 day", $week->getTimestamp()))?></h2></div><?=day(2, $service, $calendar, $week)?></div>
+        <div class="day"><div onclick="day(3)"><h2>Woensdag <?=date("d/m", strtotime("+3 day", $week->getTimestamp()))?></h2></div><?=day(3, $service, $calendar, $week)?></div>
+        <div class="day"><div onclick="day(4)"><h2>Donderdag <?=date("d/m", strtotime("+4 day", $week->getTimestamp()))?></h2></div><?=day(4, $service, $calendar, $week)?></div>
+        <div class="day"><div onclick="day(5)"><h2>Vrijdag <?=date("d/m", strtotime("+5 day", $week->getTimestamp()))?></h2></div><?=day(5, $service, $calendar, $week)?></div>
+        <div class="day"><div onclick="day(6)"><h2>Zaterdag <?=date("d/m", strtotime("+6 day", $week->getTimestamp()))?></h2></div><?=day(6, $service, $calendar, $week)?></div>
+        <div class="day"><div onclick="day(7)"><h2>Zondag <?=date("d/m", strtotime("+7 day", $week->getTimestamp()))?></h2></div><?=day(7, $service, $calendar, $week)?></div>
+      </div>
+    <?php endif; ?>
   <?php else: ?>
-
+    <h2>You shouldn't be here</h2>
   <?php endif; ?>
 </body>
 </html>
