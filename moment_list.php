@@ -1,6 +1,6 @@
 <div class="moments">
   <?php foreach ($events as $event): ?>
-    <div class="moment">
+    <div class="moment" onclick="moment('<?=$event->getId()?>')">
       <?php
 
         $start = $event->start->dateTime;
