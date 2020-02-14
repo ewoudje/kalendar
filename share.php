@@ -22,26 +22,31 @@ if (isset($_GET['code'])) {
   die;
 }
 
-if (isset($_GET['day']) && isset($_GET['moment']) && isset($_GET['ready']) && $_GET['ready'] == "true") {
+$client = getClient($decoded["campaign"]);
+
+$service = new Google_Service_Calendar($client);
+
+if (isset($_GET['day']) && isset($_GET['kalendar']) && isset($_GET['moment']) && isset($_GET['ready']) && $_GET['ready'] == "true") {
+  $calendarid = $_GET['kalendar'];
   include __DIR__ . '/back.php';
 } else {
-  $client = getClient($decoded["campaign"]);
-
-  $service = new Google_Service_Calendar($client);
-
-  $results = $service->calendarList->listCalendarList();
-  $calendars = $results->getItems();
-
-  $s_length = strlen('Kalendar');
-
-  if (empty($calendars)) {
-    print "Oops something went wrong!\n";
+  if (isset($_GET['kalendar'])) {
+    $calendarid = $_GET['kalendar'];
+    include __DIR__ . '/event_list.php';
   } else {
-    echo $decoded["user"];
-    foreach ($calendars as $calendar) {
-      if (substr($calendar->getSummary(), -$s_length) === 'Kalendar') {
-        printf("<h2>%s</h2>", substr($calendar->getSummary(), 0, -$s_length));
-        include __DIR__ . '/event_list.php';
+    $results = $service->calendarList->listCalendarList();
+    $calendars = $results->getItems();
+
+    $s_length = strlen('Kalendar');
+
+    if (empty($calendars)) {
+      print "Oops something went wrong!\n";
+    } else {
+      foreach ($calendars as $calendar) {
+        if (substr($calendar->getSummary(), -$s_length) === 'Kalendar') {
+          $calendarid = $calendar->getId();
+          include __DIR__ . '/event_list.php';
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ $client->setAuthConfig('credentials.json');
 $key = $client->getClientSecret();
 $payload = array(
     "date" => "2020-02-9",
-    "user" => "ewoud.dierickx@hotmail.be",
+    "user" => "megasupermaddness@hotmail.be",
     "period" => "2020-02-16",
     "campaign" => 3
 );
