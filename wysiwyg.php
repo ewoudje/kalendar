@@ -14,7 +14,21 @@
     <script>
 	CKEDITOR.replace( 'editor1', '' );
     </script>
+    
+    <form action="sendmail.php" method="POST" >
+        <input type="hidden" id="text" name="data" />
+        <input type="submit" id="verder" value="Verder" onclick="myFunction()">
+    </form>
+    
 </body>
+
+<script>
+    function myFunction(){
+        var data = CKEDITOR.instances.editor1.getData();
+        document.getElementById("text").value = data;
+        // Your code to save "data", usually through Ajax.
+    }
+</script>
 
 </html>
 
