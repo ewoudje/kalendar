@@ -1,21 +1,19 @@
 <?php
 
-$con = mysqli_connect("localhost", "root", "", "kalendar");
+include_once __DIR__ . "/database.php";
+
+$con = getConnection();
 
 if(isset($_POST['submit'])) {
     $mail = $_POST['email'];
     $slq_post = "INSERT INTO email (Email) VALUES ('$mail')";
-    if ($result = mysqli_query($con, $slq_post)) {
-    }
-    } else {
+    $result = mysqli_query($con, $slq_post);
 }
 
 if(isset($_POST['delete'])) {
     $delete_email = $_POST['delete_email'];
     $slq_post = "DELETE FROM email WHERE Email_Id = '$delete_email' ";
-    if ($result = mysqli_query($con, $slq_post)) {
-    }
-    } else {
+    $result = mysqli_query($con, $slq_post);
 }
 
 ?>
@@ -43,7 +41,7 @@ if(isset($_POST['delete'])) {
                         "<tr>
                             <td> %s </td>
                             <td> %s </td>
-                            <td><form action='/Kalendar/kalendar/emailadresses.php' method='POST'>
+                            <td><form action='/kalendar/emailadresses.php' method='POST'>
                                 <input type='hidden' name='delete_email' value='%s' />
                                 <input type='submit' value='delete' name='delete' />
                             </form>
@@ -59,7 +57,7 @@ if(isset($_POST['delete'])) {
 
     </table>
 
-    <form action="/Kalendar/kalendar/emailadresses.php" method="POST">
+    <form action="/kalendar/emailadresses.php" method="POST">
         <input type="email" name="email" />
         <input type="submit" value="submit" name="submit" />
     </form>
