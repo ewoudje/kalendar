@@ -23,25 +23,33 @@ if (isset($_POST['data'])) {
 
   $con = getConnection();
 
-  $sql_select_mail = "SELECT Email_Id, Email FROM email";
-  if ($result = mysqli_query($con, $sql_select_mail)) {
-      while ($row = mysqli_fetch_row($result)) {
-        $payload = array(
-            "date" => $_POST['op'],
-            "user" => $row[1],
-            "period" => $_POST['tot'],
-            "campaign" => 3
-        );
+  $sql = "SELECT client from admins WHERE admins.id = {$_SESSION['id']}";
 
-        $jwt = JWT::encode($payload, $key);
+  if ($result = mysqli_query($con, $sql)) {
+    $id = mysqli_fetch_row($result);
+    $sql = "SELECT Email_Id, Email FROM email";
+    if ($result = mysqli_query($con, $sql)) {
+        while ($row = mysqli_fetch_row($result)) {
+          $day = new DateTime($_POST['op']);
+          $payload = array(
+              "date" => date("d-m-Y", strtotime("-1 day", $day->getTimestamp())),
+              "user" => $row[1],
+              "period" => $_POST['tot'],
+              "campaign" => $id[0]
+          );
 
-        $data = $_POST['data'];
+          $jwt = JWT::encode($payload, $key);
 
-        $data = str_replace("href=\"link\"", "href='/kalendar/share.php?code=" . $jwt . "'", $data);
+          $data = $_POST['data'];
 
-        echo $data;
-      }
+          $data = str_replace("href=\"link\"", "href='/kalendar/share.php?code=" . $jwt . "'", $data);
+
+          echo $data;
+        }
+    }
   }
+
+
 }
 
 
@@ -53,7 +61,7 @@ if (isset($_POST['data'])) {
 <head>
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
-    <title>UI color picker</title>
+    <title>Kalendar</title>
     <script src="lib/ckeditor_4.13/ckeditor/ckeditor.js"></script>
 </head>
 
@@ -65,7 +73,9 @@ if (isset($_POST['data'])) {
 
     <form action="" method="POST" >
         <input type="hidden" id="text" name="data" />
-        <input type="date" id="tot" name="tot" />
+        <label for="tot">Tot waneer kunnen mensen registreren</label>
+        <input type="date" id="tot" name="tot" /><br>
+        <label for="op">Welke week? (Selecteer de eerste dag van de week)</label>
         <input type="date" id="op" name="op" />
         <input type="submit" id="verder" value="Verder" onclick="myFunction()">
     </form>
