@@ -1,14 +1,14 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,8 +26,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <p>
         <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
-        <a href="emailardesses.php">E-mail adressen toevoegen</a>
-        <a href="sendmail.php">E-mail schrijven</a>
+        <a href="register.php" class="btn btn-info">Voeg extra user toe?</a>
+        <a href="emailadresses.php" class="btn btn-info">E-mail adressen toevoegen</a>
+        <a href="sendmail.php" class="btn btn-success">E-mail schrijven</a>
     </p>
 </body>
 </html>

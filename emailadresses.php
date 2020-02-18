@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+// Check if the user is logged in, if not then redirect to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
 include_once __DIR__ . "/database.php";
 
 $con = getConnection();
@@ -61,6 +69,8 @@ if(isset($_POST['delete'])) {
         <input type="email" name="email" />
         <input type="submit" value="submit" name="submit" />
     </form>
+
+    <a href="welcome.php">Back</a>
 
 </body>
 

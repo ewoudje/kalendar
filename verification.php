@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/database.php';
 
@@ -12,9 +17,9 @@ $client->setIncludeGrantedScopes(true);
 if (isset($_GET['code'])) {
   $access_token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
   $client->setAccessToken($access_token);
-  $sql = "INSERT INTO Clients (access_token, scope, token_type, created, expires_in, refresh_token)
+  $sql = "INSERT INTO Clients (access_token, scope, token_type, created, expires_in, refresh_token, user)
     VALUES('{$access_token['access_token']}', '{$access_token['scope']}', '{$access_token['token_type']}', {$access_token['created']}
-    , {$access_token['expires_in']}, '{$access_token['refresh_token']}')";
+    , {$access_token['expires_in']}, '{$access_token['refresh_token']}', {$_SESSION["id"]})";
   $conn = getConnection();
   $conn->close();
   $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/kalendar/test.php';
