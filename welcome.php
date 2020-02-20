@@ -30,5 +30,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <a href="emailadresses.php" class="btn btn-info">E-mail adressen toevoegen</a>
         <a href="sendmail.php" class="btn btn-success">E-mail schrijven</a>
     </p>
+    <?php echo htmlspecialchars($_SESSION["client"]); ?>
 </body>
 </html>

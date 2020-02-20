@@ -23,10 +23,8 @@ if (isset($_POST['data'])) {
 
   $con = getConnection();
 
-  $sql = "SELECT client from admins WHERE admins.id = {$_SESSION['id']}";
 
-  if ($result = mysqli_query($con, $sql)) {
-    $id = mysqli_fetch_row($result);
+    $id = $_SESSION['client'];
     $sql = "SELECT Email_Id, Email FROM email";
     if ($result = mysqli_query($con, $sql)) {
         while ($row = mysqli_fetch_row($result)) {
@@ -35,7 +33,7 @@ if (isset($_POST['data'])) {
               "date" => date("d-m-Y", strtotime("-1 day", $day->getTimestamp())),
               "user" => $row[1],
               "period" => $_POST['tot'],
-              "campaign" => $id[0]
+              "campaign" => $id
           );
 
           $jwt = JWT::encode($payload, $key);
@@ -48,9 +46,6 @@ if (isset($_POST['data'])) {
         }
     }
   }
-
-
-}
 
 
 ?>
