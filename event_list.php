@@ -37,6 +37,11 @@ function day($id, $service, $calendarid, $week) {
       max-height: 100px;
     }
 
+    .dayi {
+      width: auto;
+      height: 100px;
+    }
+
     .day:hover {
       background-color: #229922;
     }
@@ -137,13 +142,13 @@ function day($id, $service, $calendarid, $week) {
       </div>
     <?php else: ?>
       <div class="days">
-        <div class="day"><div onclick="day(1)"><h2>Maandag <?=date("d/m", strtotime("+1 day", $week->getTimestamp()))?></h2></div><?=day(1, $service, $calendarid, $week)?></div>
-        <div class="day"><div onclick="day(2)"><h2>Dinsdag <?=date("d/m", strtotime("+2 day", $week->getTimestamp()))?></h2></div><?=day(2, $service, $calendarid, $week)?></div>
-        <div class="day"><div onclick="day(3)"><h2>Woensdag <?=date("d/m", strtotime("+3 day", $week->getTimestamp()))?></h2></div><?=day(3, $service, $calendarid, $week)?></div>
-        <div class="day"><div onclick="day(4)"><h2>Donderdag <?=date("d/m", strtotime("+4 day", $week->getTimestamp()))?></h2></div><?=day(4, $service, $calendarid, $week)?></div>
-        <div class="day"><div onclick="day(5)"><h2>Vrijdag <?=date("d/m", strtotime("+5 day", $week->getTimestamp()))?></h2></div><?=day(5, $service, $calendarid, $week)?></div>
-        <div class="day"><div onclick="day(6)"><h2>Zaterdag <?=date("d/m", strtotime("+6 day", $week->getTimestamp()))?></h2></div><?=day(6, $service, $calendarid, $week)?></div>
-        <div class="day"><div onclick="day(7)"><h2>Zondag <?=date("d/m", strtotime("+7 day", $week->getTimestamp()))?></h2></div><?=day(7, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(1)" class="dayi"><h2>Maandag <?=date("d/m", strtotime("+1 day", $week->getTimestamp()))?></h2></div><?=day(1, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(2)" class="dayi"><h2>Dinsdag <?=date("d/m", strtotime("+2 day", $week->getTimestamp()))?></h2></div><?=day(2, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(3)" class="dayi"><h2>Woensdag <?=date("d/m", strtotime("+3 day", $week->getTimestamp()))?></h2></div><?=day(3, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(4)" class="dayi"><h2>Donderdag <?=date("d/m", strtotime("+4 day", $week->getTimestamp()))?></h2></div><?=day(4, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(5)" class="dayi"><h2>Vrijdag <?=date("d/m", strtotime("+5 day", $week->getTimestamp()))?></h2></div><?=day(5, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(6)" class="dayi"><h2>Zaterdag <?=date("d/m", strtotime("+6 day", $week->getTimestamp()))?></h2></div><?=day(6, $service, $calendarid, $week)?></div>
+        <div class="day"><div onclick="day(7)" class="dayi"><h2>Zondag <?=date("d/m", strtotime("+7 day", $week->getTimestamp()))?></h2></div><?=day(7, $service, $calendarid, $week)?></div>
       </div>
     <?php endif; ?>
   <?php else: ?>
